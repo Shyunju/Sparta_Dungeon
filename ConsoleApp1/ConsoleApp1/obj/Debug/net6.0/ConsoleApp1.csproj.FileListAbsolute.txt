@@ -1,0 +1,15 @@
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.csproj.AssemblyReference.cache
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.AssemblyInfoInputs.cache
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.AssemblyInfo.cs
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1.exe
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1.deps.json
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1.runtimeconfig.json
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1.dll
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\ConsoleApp1.pdb
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.dll
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\refint\ConsoleApp1.dll
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.pdb
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ConsoleApp1.genruntimeconfig.cache
+N:\projects\Sparta_Dungeon\ConsoleApp1\ConsoleApp1\obj\Debug\net6.0\ref\ConsoleApp1.dll
