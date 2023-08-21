@@ -3,12 +3,11 @@ using System.Security.Permissions;
 
 public class Class1
 {
+    private static Character player;
     static void Main(string[] args)
     {
+        MakePlayer();
         GameStart();
-
-
-
     }
 
     static void GameStart()
@@ -21,29 +20,91 @@ public class Class1
         Console.WriteLine("2.인벤토리");
 
         Console.WriteLine("원하시는 행동을 입력해주세요.");
-        string input = Console.ReadLine();
-        int key;
-        bool isInt = int.TryParse(input, out key);
+        int number;
 
-        if (key == 1)
+        number = CheckValidInput(1, 2);
+        if (number == 1)
         {
-            Console.WriteLine("상태보기");
+            ShowInfo();
+            //Console.WriteLine("상태보기");
             //상태보기 함수 호출
-        }
-        else if (key == 2)
-        {
-            Console.WriteLine("인벤토리");
-            //인벤토리 함수 호출
         }
         else
         {
-            Console.WriteLine("잘못된 입력입니다. 앤터를 눌러 처음으로 돌아갑니다.");
-            Console.ReadLine();
+            Inventory();
+            //Console.WriteLine("인벤토리");
+            //인벤토리 함수 호출
+        }
+        
+    }
+
+    static void ShowInfo()
+    {
+        Console.Clear();
+        Console.WriteLine("상태보기");
+        Console.WriteLine("캐릭터의 정보가 표시됩니다. \n");
+
+        Console.WriteLine($"level : {player.Level}");
+        Console.WriteLine($"직업 : {player.Job}");
+        Console.WriteLine($"공격력 : {player.AttackPower}");
+        Console.WriteLine($"방어력 : {player.GuardPower}");
+        Console.WriteLine($"HP : {player.HP}");
+        Console.WriteLine($"GOLD : {player.Gold}");
+        Console.WriteLine();
+        Console.WriteLine("0을 누르면 나가기");
+        Console.WriteLine();
+
+        int number = CheckValidInput(0, 0);
+        if (number == 0)
+        {
             GameStart();
         }
 
+    }
+    static void MakePlayer()
+    {
+        player = new Character(1, "fighter", 50, 50, 100, 1500);
+    }
+    public class Character
+    {
+        public int Level { get; }
+        public string Job { get; }
+        public int AttackPower { get; }
+        public int GuardPower { get; }
+        public int HP { get; }
+        public int Gold { get; }
 
+        public Character(int level, string job, int attackPower, int guardPower, int hp, int gold)
+        {
+            Level = level;
+            Job = job;
+            AttackPower = attackPower;
+            GuardPower = guardPower;
+            HP = hp;
+            Gold = gold;
+        }
+    }
 
+    static void Inventory()
+    {
+        Console.WriteLine("인벤토리");
+        Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+    }
+    static int CheckValidInput(int min, int max)
+    {
+        while (true)
+        {
+            string input = Console.ReadLine();
+
+            bool parseSuccess = int.TryParse(input, out var ret);
+            if (parseSuccess)
+            {
+                if(ret >= min && ret <= max)
+                    return ret;        
+            }
+            
+            Console.WriteLine("잘못된 입력입니다.");
+        }
     }
 }
 
