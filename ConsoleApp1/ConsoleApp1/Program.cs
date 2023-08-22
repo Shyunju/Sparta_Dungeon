@@ -1,12 +1,22 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 
+struct Item
+{
+    public string name;
+    public string effect;
+    public string description;
+    public bool install;
+}
 public class Class1
 {
     private static Character player;
+
     static void Main(string[] args)
     {
         MakePlayer();
+        MakeItem();
         GameStart();
     }
 
@@ -35,7 +45,7 @@ public class Class1
             //Console.WriteLine("인벤토리");
             //인벤토리 함수 호출
         }
-        
+
     }
 
     static void ShowInfo()
@@ -85,11 +95,31 @@ public class Class1
         }
     }
 
-    static void Inventory()
+    static void MakeItem()
+    {
+        Item itm1;
+        Item itm2;
+
+        itm1.name = "무쇠갑옷";
+        itm1.effect = "방어력+2";
+        itm1.description = "무쇠로 만들어져 튼튼한 갑옷입니다.";
+        itm1.install = false;
+
+        itm2.name = "낡은 검";
+        itm2.effect = "공격력+2";
+        itm2.description = "쉽게 볼 수 있는 낡은 검입니다.";
+        itm2.install = false;
+
+        List<Item> items = new List<Item>();
+    }
+
+
+static void Inventory()
     {
         Console.WriteLine("인벤토리");
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
     }
+
     static int CheckValidInput(int min, int max)
     {
         while (true)
