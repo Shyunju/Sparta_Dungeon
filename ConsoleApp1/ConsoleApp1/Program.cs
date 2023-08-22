@@ -8,7 +8,7 @@ struct Item
     public string effect;
     public string description;
     public bool install;
-}
+};
 public class Class1
 {
     private static Character player;
@@ -16,7 +16,7 @@ public class Class1
     static void Main(string[] args)
     {
         MakePlayer();
-        MakeItem();
+        //MakeItem();
         GameStart();
     }
 
@@ -41,7 +41,7 @@ public class Class1
         }
         else
         {
-            Inventory();
+            MakeItem();
             //Console.WriteLine("인벤토리");
             //인벤토리 함수 호출
         }
@@ -97,8 +97,14 @@ public class Class1
 
     static void MakeItem()
     {
+        Item itm0;
         Item itm1;
         Item itm2;
+
+        itm0.name = "무쇠갑옷";
+        itm0.effect = "방어력+2";
+        itm0.description = "무쇠로 만들어져 튼튼한 갑옷입니다.";
+        itm0.install = false;
 
         itm1.name = "무쇠갑옷";
         itm1.effect = "방어력+2";
@@ -110,14 +116,51 @@ public class Class1
         itm2.description = "쉽게 볼 수 있는 낡은 검입니다.";
         itm2.install = false;
 
-        List<Item> items = new List<Item>();
+        List<Item> list = new List<Item>();
+        list.Add(itm0);
+        list.Add(itm1);
+        list.Add(itm2);
+        Item[] items = list.ToArray();
+        //Item[] items = {  };
+        //Item[] items = Array.Empty<Item>();
+        //items[0].name = "asdf"; items[0].effect = "qwer"; items[0].description = "poui"; items[0].install = false;
+        //items[0] = itm0;
+        //items[1] = itm1;
+        //items[2] = itm2;
+
+        Inventory(items);
     }
 
 
-static void Inventory()
+static void Inventory( Item[] item)
     {
+        Console.Clear();
         Console.WriteLine("인벤토리");
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+
+        for (int i = 1; i < item.Length; i++)
+        {
+            Console.Write(i + ".  ");
+            if (item[i].install)
+            {
+                Console.Write("[E]");
+            }
+            Console.Write(item[i].name + "      |    " ); 
+            Console.Write(item[i].effect + "      |    "); 
+            Console.WriteLine(item[i].description ); 
+        }
+        Console.WriteLine("0번을 누르면 나가기");
+        int number = CheckValidInput(0, item.Length-1);
+        if(number == 0)
+        {
+            GameStart();
+        }
+        else
+        {
+            item[number].install = !item[number].install;
+            Inventory(item);
+        }
+
     }
 
     static int CheckValidInput(int min, int max)
