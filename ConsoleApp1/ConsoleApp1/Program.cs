@@ -16,7 +16,6 @@ public class Class1
     static void Main(string[] args)
     {
         MakePlayer();
-        //MakeItem();
         GameStart();
     }
 
@@ -36,14 +35,10 @@ public class Class1
         if (number == 1)
         {
             ShowInfo();
-            //Console.WriteLine("상태보기");
-            //상태보기 함수 호출
         }
         else
         {
             MakeItem();
-            //Console.WriteLine("인벤토리");
-            //인벤토리 함수 호출
         }
 
     }
@@ -56,8 +51,8 @@ public class Class1
 
         Console.WriteLine($"level : {player.Level}");
         Console.WriteLine($"직업 : {player.Job}");
-        Console.WriteLine($"공격력 : {player.AttackPower}");
-        Console.WriteLine($"방어력 : {player.GuardPower}");
+        Console.Write($"공격력 : {player.AttackPower}  "); Console.WriteLine( player.AttackEffect);
+        Console.Write($"방어력 : {player.GuardPower}"); Console.WriteLine(player.GuardEffect);
         Console.WriteLine($"HP : {player.HP}");
         Console.WriteLine($"GOLD : {player.Gold}");
         Console.WriteLine();
@@ -73,18 +68,21 @@ public class Class1
     }
     static void MakePlayer()
     {
-        player = new Character(1, "fighter", 50, 50, 100, 1500);
+        player = new Character(1, "fighter", "50", "50", 100, 1500);
     }
     public class Character
     {
         public int Level { get; }
         public string Job { get; }
-        public int AttackPower { get; }
-        public int GuardPower { get; }
+        public string AttackPower { get; }
+        public string GuardPower { get; }
         public int HP { get; }
         public int Gold { get; }
+        public bool Tool;
+        public string AttackEffect;
+        public string GuardEffect;
 
-        public Character(int level, string job, int attackPower, int guardPower, int hp, int gold)
+        public Character(int level, string job, string attackPower, string guardPower, int hp, int gold)
         {
             Level = level;
             Job = job;
@@ -92,6 +90,9 @@ public class Class1
             GuardPower = guardPower;
             HP = hp;
             Gold = gold;
+            Tool = false;
+            AttackEffect = "";
+            GuardEffect = "";
         }
     }
 
@@ -121,12 +122,6 @@ public class Class1
         list.Add(itm1);
         list.Add(itm2);
         Item[] items = list.ToArray();
-        //Item[] items = {  };
-        //Item[] items = Array.Empty<Item>();
-        //items[0].name = "asdf"; items[0].effect = "qwer"; items[0].description = "poui"; items[0].install = false;
-        //items[0] = itm0;
-        //items[1] = itm1;
-        //items[2] = itm2;
 
         Inventory(items);
     }
@@ -137,6 +132,7 @@ static void Inventory( Item[] item)
         Console.Clear();
         Console.WriteLine("인벤토리");
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+        char ch = '+';
 
         for (int i = 1; i < item.Length; i++)
         {
@@ -144,6 +140,24 @@ static void Inventory( Item[] item)
             if (item[i].install)
             {
                 Console.Write("[E]");
+                if (item[i].effect.Substring(0,3) == "공격력")
+                {
+                    player.AttackEffect = "(" + item[i].effect.Substring(item[i].effect.LastIndexOf(ch)) + ")";
+                }else if (item[i].effect.Substring(0, 3) == "방어력")
+                {
+                    player.GuardEffect = "(" + item[i].effect.Substring(item[i].effect.LastIndexOf(ch)) + ")";
+                }
+            }
+            else
+            {
+                if (item[i].effect.Substring(0, 3) == "공격력")
+                {
+                    player.AttackEffect = "";
+                }
+                else if (item[i].effect.Substring(0, 3) == "방어력")
+                {
+                    player.GuardEffect = "";
+                }
             }
             Console.Write(item[i].name + "      |    " ); 
             Console.Write(item[i].effect + "      |    "); 
