@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 
-struct Item
+struct Item //아이템 구조체
 {
     public string name;
     public string effect;
@@ -13,8 +13,7 @@ struct Item
 public class Class1
 {
     private static Character player;
-    private static List<Item> list = new List<Item>();
-    //private static Item[] array = Array.Empty<Item>();
+    private static List<Item> list = new List<Item>(); //생성된 아이템을 보관하는 리스트
 
     static void Main(string[] args)
     {
@@ -23,7 +22,7 @@ public class Class1
         GameStart();
     }
 
-    static void GameStart()
+    static void GameStart() //첫화면 출력
     {
         Console.Clear();
         Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
@@ -55,7 +54,7 @@ public class Class1
 
     }
 
-    static void ShowInfo()
+    static void ShowInfo() //상태보기 선택시 상태 출력
     {
         Console.Clear();
         Console.BackgroundColor = ConsoleColor.White;
@@ -66,8 +65,8 @@ public class Class1
 
         Console.WriteLine($"level : {player.Level}");
         Console.WriteLine($"직업 : {player.Job}");
-        Console.Write($"공격력 : {player.AttackPower}  "); Console.WriteLine( player.AttackEffect);
-        Console.Write($"방어력 : {player.GuardPower}"); Console.WriteLine(player.GuardEffect);
+        Console.Write($"공격력 : {player.AttackPower}  {player.AttackEffect} \n"); 
+        Console.Write($"방어력 : {player.GuardPower}  {player.GuardEffect} \n"); 
         Console.WriteLine($"HP : {player.HP}");
         Console.WriteLine($"GOLD : {player.Gold}");
         Console.WriteLine();
@@ -81,11 +80,11 @@ public class Class1
         }
 
     }
-    static void MakePlayer()
+    static void MakePlayer() //플레이어 객체 생성
     {
         player = new Character(1, "fighter", "50", "50", 100, 1500);
     }
-    public class Character
+    public class Character //플레이어를 생성가능한 클래스
     {
         public int Level { get; }
         public string Job { get; }
@@ -112,7 +111,7 @@ public class Class1
         }
     }
 
-    static void MakeItem()
+    static void MakeItem() //아이템 정보를 생산해 리스트에 추가
     {
         Item itm0;
         Item itm1;
@@ -126,7 +125,7 @@ public class Class1
         itm0.install = false;
 
         itm1.name = "무쇠갑옷";
-        itm1.effect = "방어력+2";
+        itm1.effect = "방어력+10";
         itm1.description = "무쇠로 만들어져 튼튼한 갑옷입니다.";
         itm1.install = false;
 
@@ -140,18 +139,16 @@ public class Class1
         itm3.description = "여신의 축복이 느껴집니다.";
         itm3.install = false;
 
-        //List<Item> list = new List<Item>();
         list.Add(itm0);
         list.Add(itm1);
         list.Add(itm2);
         list.Add(itm3);
-        //array = list.ToArray();
 
     }
     
 
 
-    static void Inventory( List<Item> item)
+    static void Inventory( List<Item> item) //인벤토리 출력
     {
         Console.Clear();
         Console.BackgroundColor = ConsoleColor.Yellow;
@@ -165,18 +162,18 @@ public class Class1
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(i + ".  ");
-            if (item[i].install)
+            if (item[i].install) //장착 여부 확인
             {
-                Console.Write("[E]");
+                Console.Write("[E]"); //장착 메세지 출력
                 if (item[i].effect.Substring(0,3) == "공격력")
                 {
-                    player.AttackEffect = "(" + item[i].effect.Substring(item[i].effect.LastIndexOf(ch)) + ")";
+                    player.AttackEffect = "(" + item[i].effect.Substring(item[i].effect.LastIndexOf(ch)) + ")"; // 아이템 고유호과 상태보기에서 추가 출력
                 }else if (item[i].effect.Substring(0, 3) == "방어력")
                 {
                     player.GuardEffect = "(" + item[i].effect.Substring(item[i].effect.LastIndexOf(ch)) + ")";
                 }
             }
-            else
+            else //장착중이 아니라면 고유효과 부여 안함
             {
                 if (item[i].effect.Substring(0, 3) == "공격력")
                 {
@@ -187,7 +184,7 @@ public class Class1
                     player.GuardEffect = "";
                 }
             }
-            Console.Write(item[i].name + "      |    " ); 
+            Console.Write(item[i].name + "      |  " ); 
             Console.Write(item[i].effect + "      |    "); 
             Console.WriteLine(item[i].description ); 
         }
@@ -198,7 +195,7 @@ public class Class1
         {
             GameStart();
         }
-        else
+        else // 장착여부를 아이템 리스트에 수정
         {
             Item temp = item[number];
             temp.install = !item[number].install;
