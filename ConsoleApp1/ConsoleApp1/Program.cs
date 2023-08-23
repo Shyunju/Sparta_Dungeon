@@ -12,10 +12,13 @@ struct Item
 public class Class1
 {
     private static Character player;
+    private static List<Item> list = new List<Item>();
+    //private static Item[] array = Array.Empty<Item>();
 
     static void Main(string[] args)
     {
         MakePlayer();
+        MakeItem();
         GameStart();
     }
 
@@ -38,7 +41,8 @@ public class Class1
         }
         else
         {
-            MakeItem();
+            //MakeItem();
+            Inventory(list);
         }
 
     }
@@ -82,6 +86,7 @@ public class Class1
         public string AttackEffect;
         public string GuardEffect;
 
+
         public Character(int level, string job, string attackPower, string guardPower, int hp, int gold)
         {
             Level = level;
@@ -117,24 +122,23 @@ public class Class1
         itm2.description = "쉽게 볼 수 있는 낡은 검입니다.";
         itm2.install = false;
 
-        List<Item> list = new List<Item>();
+        //List<Item> list = new List<Item>();
         list.Add(itm0);
         list.Add(itm1);
         list.Add(itm2);
-        Item[] items = list.ToArray();
+        //array = list.ToArray();
 
-        Inventory(items);
     }
 
 
-static void Inventory( Item[] item)
+static void Inventory( List<Item> item)
     {
         Console.Clear();
         Console.WriteLine("인벤토리");
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         char ch = '+';
 
-        for (int i = 1; i < item.Length; i++)
+        for (int i = 1; i < item.Count; i++)
         {
             Console.Write(i + ".  ");
             if (item[i].install)
@@ -164,14 +168,16 @@ static void Inventory( Item[] item)
             Console.WriteLine(item[i].description ); 
         }
         Console.WriteLine("0번을 누르면 나가기");
-        int number = CheckValidInput(0, item.Length-1);
+        int number = CheckValidInput(0, item.Count-1);
         if(number == 0)
         {
             GameStart();
         }
         else
         {
-            item[number].install = !item[number].install;
+            Item temp = item[number];
+            temp.install = !item[number].install;
+            item[number] = temp; 
             Inventory(item);
         }
 
