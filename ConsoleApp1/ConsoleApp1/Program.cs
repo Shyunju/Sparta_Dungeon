@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 
@@ -28,8 +29,15 @@ public class Class1
         Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
         Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
 
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("1.상태 보기");
+        Console.ResetColor();
+
+        Console.BackgroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Black;
         Console.WriteLine("2.인벤토리");
+        Console.ResetColor();
 
         Console.WriteLine("원하시는 행동을 입력해주세요.");
         int number;
@@ -50,7 +58,10 @@ public class Class1
     static void ShowInfo()
     {
         Console.Clear();
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("상태보기");
+        Console.ResetColor();
         Console.WriteLine("캐릭터의 정보가 표시됩니다. \n");
 
         Console.WriteLine($"level : {player.Level}");
@@ -106,9 +117,11 @@ public class Class1
         Item itm0;
         Item itm1;
         Item itm2;
+        Item itm3;
+
 
         itm0.name = "무쇠갑옷";
-        itm0.effect = "방어력+2";
+        itm0.effect = "방어력+10";
         itm0.description = "무쇠로 만들어져 튼튼한 갑옷입니다.";
         itm0.install = false;
 
@@ -118,28 +131,39 @@ public class Class1
         itm1.install = false;
 
         itm2.name = "낡은 검";
-        itm2.effect = "공격력+2";
+        itm2.effect = "공격력+10";
         itm2.description = "쉽게 볼 수 있는 낡은 검입니다.";
         itm2.install = false;
+
+        itm3.name = "여신의 목걸이";
+        itm3.effect = "공격력+10";
+        itm3.description = "여신의 축복이 느껴집니다.";
+        itm3.install = false;
 
         //List<Item> list = new List<Item>();
         list.Add(itm0);
         list.Add(itm1);
         list.Add(itm2);
+        list.Add(itm3);
         //array = list.ToArray();
 
     }
+    
 
 
-static void Inventory( List<Item> item)
+    static void Inventory( List<Item> item)
     {
         Console.Clear();
+        Console.BackgroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Black;
         Console.WriteLine("인벤토리");
+        Console.ResetColor();
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         char ch = '+';
 
         for (int i = 1; i < item.Count; i++)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(i + ".  ");
             if (item[i].install)
             {
@@ -167,6 +191,7 @@ static void Inventory( List<Item> item)
             Console.Write(item[i].effect + "      |    "); 
             Console.WriteLine(item[i].description ); 
         }
+        Console.ResetColor();
         Console.WriteLine("0번을 누르면 나가기");
         int number = CheckValidInput(0, item.Count-1);
         if(number == 0)
